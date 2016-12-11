@@ -44,13 +44,16 @@ async def on_ready():
 async def on_server_join(server):
     bot.register_server(server)
 
+@client.event
 async def on_server_remove(server):
     bot.deregister_server(server)
 
+@client.event
 async def on_channel_create(channel):
     if not channel.is_private:
         bot.get_server_instance(channel.server.id).register_channel(channel)
 
+@client.event
 async def on_channel_delete(channel):
     if not channel.is_private:
         bot.get_server_instance(channel.server.id).deregister_channel(channel)
